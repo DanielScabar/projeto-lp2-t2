@@ -7,7 +7,9 @@ const observacoesPorLembreteId = {};
 
 app.use(bodyParser.json());
 
-app.get("/lembretes/:id/observacoes", (req, res) => {});
+app.get("/lembretes/:id/observacoes", (req, res) => {
+  res.send(observacoesPorLembreteId[req.params.id] || []); //Retorna lista de observações associadas ao lembrete na URL
+});
 
 app.put("/lembretes/:id/observacoes", (req, res) => {
   const idObs = uuidv4(); //Gera ID para a observação
