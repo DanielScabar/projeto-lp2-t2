@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const axios = require("axios"); //Gerar evento quando lembrete for criado
 
 const app = express();
 const lembretes = {};
@@ -11,13 +12,21 @@ app.get("/lembretes", (req, res) => {
   res.send(lembretes);
 });
 
-app.put("/lembretes", (req, res) => {
+app.put("/lembretes", async (req, res) => {
   contador++;
   const { texto } = req.body;
   lembretes[contador] = {
     contador,
     texto,
   };
+
+  await axios.post("http://localhost:10000/eventos", {
+    tipo: "LembreteCriado",
+    dados: {
+      contador,
+      texto,
+    },
+  });
   res.status(201).send(lembretes[contador]);
 });
 
