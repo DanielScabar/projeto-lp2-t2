@@ -16,7 +16,7 @@ app.put("/lembretes/:id/observacoes", async (req, res) => {
   const idObs = uuidv4(); //Gera ID para a observação
   const { texto } = req.body; //Extrai conteúdo do cabeçalho da requisição
   const observacoesDoLembrete = observacoesPorLembreteId[req.params.id] || []; //Verifica se já existe lista de observações em um lembrete e salva.
-  observacoesDoLembrete.push({ id: idObs, texto }); //Adiciona observação na lista
+  observacoesDoLembrete.push({ id: idObs, texto, status: "aguardando" }); //Adiciona observação na lista
   observacoesPorLembreteId[req.params.id] = observacoesDoLembrete; //Salva lista de observações do lembrete
   await axios.post("http://localhost:10000/eventos", {
     tipo: "ObservacaoCriada",
@@ -24,6 +24,7 @@ app.put("/lembretes/:id/observacoes", async (req, res) => {
       id: idObs,
       texto,
       lembreteId: req.params.id,
+      status: "aguardando",
     },
   }); //Emite evento quando observaçao for criada
 
