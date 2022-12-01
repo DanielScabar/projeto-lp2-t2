@@ -1,4 +1,6 @@
 const express = require("express");
+const axios = require("axios");
+
 const app = express();
 
 const baseConsulta = {};
@@ -34,6 +36,12 @@ app.post("/eventos", (req, res) => {
   res.status(200).send(baseConsulta);
 });
 
-app.listen(6000, () => {
+app.listen(6000, async () => {
   console.log("Consultas. Porta 6000");
+  const resp = await axios.get("http://localhost:10000/eventos");
+  resp.data.forEach((valor, indice, colecao) => {
+    try {
+      funcoes[valor.tipo](valor.dados);
+    } catch (err) {}
+  });
 });
