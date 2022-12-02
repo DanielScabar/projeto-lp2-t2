@@ -11,7 +11,7 @@ const funcoes = {
     const observacoes = observacoesPorLembreteId[observacao.lembreteId];
     const obsParaAtualizar = observacoes.find((o) => o.id === observacao.id);
     obsParaAtualizar.status = observacao.status;
-    axios.post("http://localhost:10000/eventos", {
+    axios.post("http://192.168.15.160:10000/eventos", {
       tipo: "ObservacaoAtualizada",
       dados: {
         id: observacao.id,
@@ -35,7 +35,7 @@ app.put("/lembretes/:id/observacoes", async (req, res) => {
   const observacoesDoLembrete = observacoesPorLembreteId[req.params.id] || []; //Verifica se já existe lista de observações em um lembrete e salva.
   observacoesDoLembrete.push({ id: idObs, texto, status: "aguardando" }); //Adiciona observação na lista
   observacoesPorLembreteId[req.params.id] = observacoesDoLembrete; //Salva lista de observações do lembrete
-  await axios.post("http://localhost:10000/eventos", {
+  await axios.post("http://192.168.15.160:10000/eventos", {
     tipo: "ObservacaoCriada",
     dados: {
       id: idObs,
