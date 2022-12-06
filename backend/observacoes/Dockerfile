@@ -1,5 +1,5 @@
 #alpine: imagem Linux "pequena"
-FROM node:alpine
+FROM node:18.12.1
 
 # um diretório no sistema de arquivos do contêiner para os comandos a seguir
 WORKDIR /app
