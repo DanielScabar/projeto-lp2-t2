@@ -12,13 +12,13 @@ app.post("/eventos", (req, res) => {
   const evento = req.body;
   eventos.push(evento);
   //envia o evento para o microsserviço de lembretes
-  axios.post("http://192.168.15.160:4000/eventos", evento);
+  axios.post("http://lembretes-clusterip-service:4000/eventos", evento);
   //envia o evento para o microsserviço de observações
-  axios.post("http://192.168.15.160:5000/eventos", evento);
+  axios.post("http://observacoes-clusterip-service:5000/eventos", evento);
   //envia o evento para o microsserviço de consulta
-  axios.post("http://192.168.15.160:6000/eventos", evento);
+  axios.post("http://consulta-clusterip-service:6000/eventos", evento);
   //envia o evento para o microsservico de classificacao
-  axios.post("http://192.168.15.160:7000/eventos", evento);
+  axios.post("http://classificacao-clusterip-service:7000/eventos", evento);
   res.status(200).send({ msg: "ok" });
 });
 
