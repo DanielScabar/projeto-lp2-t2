@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -8,9 +8,7 @@ export default () => {
     const onSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.post('https://localhost:4000/lembretes', {
-            topic,
-        });
+        await axios.put('http://localhost:4000/lembretes', {topic,});
 
         setTopic('');
     };
