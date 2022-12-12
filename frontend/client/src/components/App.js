@@ -7,10 +7,10 @@ export default () => {
   return (
   <div className='container'>
     <h1>Crie seu Lembrete</h1>
-    <CriarLembrete/>
+    <CriarLembrete />
     <hr/>
     <h1>Lembretes:</h1>
-    <ListarLembrete/>
+    <ListarLembrete />
     </div>
   );
 };

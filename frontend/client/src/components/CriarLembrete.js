@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react'
+import axios from 'axios'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-    const [topic, setTopic] = useState('');
+    const [topic, setTopic] = useState('')
 
     const onSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
-        await axios.put('http://localhost:4000/lembretes', {topic,});
+        await axios.put('http://localhost:4000/lembretes', {"texto":topic})
 
-        setTopic('');
-    };
+        setTopic('')
+    }
 
     return (
         <div>
@@ -27,5 +27,5 @@ export default () => {
                 <button className="btn btn-primary">Enviar</button>
             </form>
         </div>
-    );
-};
+    )
+}
