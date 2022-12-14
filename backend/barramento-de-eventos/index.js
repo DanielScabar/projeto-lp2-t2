@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 const axios = require("axios"); //Para enviar eventos para os demais microsserviços
 
 const app = express();
+app.use(cors());
 const eventos = [];
 
 app.use(bodyParser.json());

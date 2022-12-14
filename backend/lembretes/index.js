@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios"); //Gerar evento quando lembrete for criado
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 const lembretes = {};
 let contador = 0;
 

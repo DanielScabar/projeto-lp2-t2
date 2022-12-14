@@ -1,27 +1,33 @@
-import React, {useState, useEffect} from "react"
-import axios from "axios"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({lembreteId}) => {
-    const [observations, setObservations] = useState([])
+export default ({ lembreteId }) => {
+    const [observations, setObservations] = useState([]);
 
     const buscarObservacoes = async () => {
-        const res = await axios.get(`http://localhost:5000/lembretes/${lembreteId}/observacoes`)
-    
-        setObservations(res.dados)
-    }
+        const res = await axios.get(
+            `http://localhost:5000/lembretes/${lembreteId}/observacoes`
+        );
+
+        setObservations(res.data);
+    };
 
     useEffect(() => {
-        buscarObservacoes()
-    }, [])
+        buscarObservacoes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    const observacoesOrganizadas = observations.map(observacao => {
-        return <li key={observacao.id}>{observacao.texto}</li>
-    })
+    const observacoesOrganizadas = observations.map((observacao) => {
+        if ((observacao.status === "importante")) {
+            return (
+                <li key={observacao.id}>
+                    <mark>{observacao.texto}</mark>
+                </li>
+            );
+        }
+        return <li key={observacao.id}>{observacao.texto}</li>;
+    });
 
-    return (
-        <ul>
-            {observacoesOrganizadas}
-        </ul>
-    )
-}
+    return <ul>{observacoesOrganizadas}</ul>;
+};
